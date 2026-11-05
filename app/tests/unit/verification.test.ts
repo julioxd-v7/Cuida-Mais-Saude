@@ -50,7 +50,7 @@ describe('perfil profissional', () => {
     expect(missing.includes('CPF')).toBe(true);
   });
 
-  it('enfermeiro precisa do COREN; fisioterapeuta do CREFITO', () => {
+  it('técnico de enfermagem precisa do COREN; fisioterapeuta do CREFITO', () => {
     expect(missingFields({ ...complete, profession: 'nurse' })).toEqual(['registro no COREN']);
     expect(missingFields({ ...complete, profession: 'physiotherapist' })).toEqual(['registro no CREFITO']);
     expect(missingFields({ ...complete, profession: 'nurse', councilNumber: '123456', councilState: 'SP' })).toEqual([]);

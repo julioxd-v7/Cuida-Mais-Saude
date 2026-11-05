@@ -45,7 +45,7 @@ export const UF_LIST = [
 /** Categorias profissionais do MVP (técnico de enfermagem fica para depois). */
 export const PROFESSION_OPTIONS = [
   { value: 'caregiver', label: 'Cuidador(a) de idosos' },
-  { value: 'nurse', label: 'Enfermeiro(a)' },
+  { value: 'nurse', label: 'Técnico(a) de enfermagem' },
   { value: 'physiotherapist', label: 'Fisioterapeuta' },
 ] as const;
 

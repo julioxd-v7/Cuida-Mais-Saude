@@ -51,7 +51,7 @@ describe('catálogo de profissões', () => {
     }
   });
 
-  test('enfermeiro herda o serviço de cuidado; fisioterapeuta não', () => {
+  test('técnico de enfermagem herda o serviço de cuidado; fisioterapeuta não', () => {
     assert.ok(PROFESSION_CATALOG.nurse.serviceTypes.includes('care'));
     assert.deepEqual(PROFESSION_CATALOG.physiotherapist.serviceTypes, ['physiotherapy']);
     assert.deepEqual(PROFESSION_CATALOG.caregiver.serviceTypes, ['care']);
@@ -99,7 +99,7 @@ describe('CPF e conselho', () => {
     assert.equal(duplicate.body.code, 'CPF_IN_USE');
   });
 
-  test('enfermeiro sem número do COREN fica incompleto', async () => {
+  test('técnico de enfermagem sem número do COREN fica incompleto', async () => {
     const nurse = await register(app, caregiverPayload());
     const response = await app.call('PATCH', '/v1/me/caregiver-profile', {
       token: nurse.accessToken,

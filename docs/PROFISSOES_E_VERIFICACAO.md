@@ -5,11 +5,11 @@
 | Categoria | Função principal | Conselho | Serviços que pode atender |
 |---|---|---|---|
 | Cuidador(a) de idosos | apoio nas atividades diárias, conforto, companhia e segurança | — | Cuidado e companhia |
-| Enfermeiro(a) | avaliação, plano de cuidados, procedimentos e supervisão de enfermagem | **COREN** | Cuidado e companhia · Procedimentos de enfermagem · Avaliação e plano de enfermagem |
+| Técnico(a) de enfermagem | cuidados e procedimentos de enfermagem, sob supervisão de enfermeiro | **COREN** | Cuidado e companhia · Procedimentos de enfermagem · Avaliação e plano de enfermagem |
 | Fisioterapeuta | reabilitação, mobilidade, força, equilíbrio e prevenção de quedas | **CREFITO** | Fisioterapia |
 
-- **Uma categoria por profissional.** O enfermeiro "herda" o serviço de cuidado; o fisioterapeuta não.
-- **Técnico de enfermagem: fora do MVP.** Pela legislação de enfermagem, o técnico atua sob supervisão de enfermeiro. Atender sozinho em domicílio por um marketplace é um risco a validar juridicamente.
+- **Uma categoria por profissional.** O técnico de enfermagem "herda" o serviço de cuidado; o fisioterapeuta não.
+- **Técnico de enfermagem.** Pela legislação de enfermagem, o técnico atua sob supervisão de enfermeiro. Atender sozinho em domicílio por um marketplace é um risco a validar juridicamente.
 - O **cliente escolhe o tipo de serviço** (cuidado, procedimento de enfermagem, avaliação de enfermagem ou fisioterapia), e o sistema só oferece profissionais habilitados. Isso entra no fluxo de solicitação, na próxima etapa.
 - **Procedimentos de enfermagem:** o cliente vai declarar que possui prescrição, e o profissional confere no local. Também entra no fluxo de solicitação.
 
@@ -20,13 +20,13 @@ A fonte única dessas regras são as funções SQL `profession_service_types`, `
 ## 2. O que o profissional precisa informar
 
 **No perfil profissional:**
-- profissão, **CPF** (com dígitos verificadores, único no sistema) e registro no conselho (número + UF) para enfermeiro e fisioterapeuta;
+- profissão, **CPF** (com dígitos verificadores, único no sistema) e registro no conselho (número + UF) para técnico de enfermagem e fisioterapeuta;
 - apresentação, experiência, especialidades;
 - região de atendimento (cidade, UF, bairro opcional, raio) e disponibilidade.
 
 **Documentos** (PDF ou foto de até 10 MB):
 
-| Documento | Cuidador | Enfermeiro | Fisioterapeuta |
+| Documento | Cuidador | Técnico de enfermagem | Fisioterapeuta |
 |---|:-:|:-:|:-:|
 | Documento com foto (RG/CNH) | ✅ | ✅ | ✅ |
 | **Certidão de antecedentes criminais** | ✅ | ✅ | ✅ |

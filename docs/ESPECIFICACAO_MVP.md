@@ -53,7 +53,7 @@
 | Tema | Hoje no código | PDF | Esta especificação adota |
 |---|---|---|---|
 | Cidade de lançamento | São Paulo - SP | Recife e RMR | **Recife** (P3). Migração troca as áreas, sem apagar dados |
-| Profissões | Cuidador(a), Enfermeiro(a), Fisioterapeuta | Não clínico no MVP | **Cuidador(a) / acompanhante** ativo. Enfermeiro e fisioterapeuta **ocultos no cadastro** (`CLINICAL_SERVICES_ENABLED=false`); dados existentes preservados |
+| Profissões | Cuidador(a), Técnico(a) de enfermagem, Fisioterapeuta | Não clínico no MVP | **Cuidador(a) / acompanhante** ativo. Técnico de enfermagem e fisioterapeuta **ocultos no cadastro** (`CLINICAL_SERVICES_ENABLED=false`); dados existentes preservados |
 | Tipos de serviço | `care`, `nursing_procedure`, `nursing_assessment`, `physiotherapy` | Companhia, apoio cotidiano, acompanhamento a compromissos, apoio à família | **Novo catálogo** de categorias (CAT-01). Os tipos clínicos atuais ficam `clinical = true` e desativados |
 | Comissão | Não implementada (havia menção a 75/25 em rascunho) | 20% / 80% | **20% / 80%** |
 | Faixas de preço | Exemplos de São Paulo | Ticket de R$ 200 é só hipótese | Faixas de **Recife** com valores **provisórios**, marcados como tal até validação |
@@ -392,7 +392,7 @@ Os padrões abaixo **destravam o desenvolvimento**, mas ficam **configuráveis**
 | D12 | Bairros e raio da área-piloto em Recife | Recife inteiro; raio do profissional como hoje | — |
 | D13 | Faixas de preço de Recife por categoria | Valores provisórios (o ticket de R$ 200 do PDF é hipótese) | — |
 | D14 | Fornecedor de push | Notificação dentro do app (polling) | Aviso com o app fechado |
-| D15 | Enfermeiros e fisioterapeutas já cadastrados | Ficam com o perfil guardado, sem aparecer, até haver categoria clínica liberada | — |
+| D15 | Técnicos de enfermagem e fisioterapeutas já cadastrados | Ficam com o perfil guardado, sem aparecer, até haver categoria clínica liberada | — |
 
 ---
 

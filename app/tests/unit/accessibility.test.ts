@@ -118,7 +118,7 @@ describe('leitura do perfil em voz alta', () => {
       profession: 'nurse',
       verified: true,
       council: { name: 'COREN', state: 'SP' },
-      bio: 'Enfermeira há 8 anos.',
+      bio: 'Técnica de enfermagem há 8 anos.',
       experienceYears: 8,
       specialties: ['elderly'],
       serviceTypes: ['companionship', 'appointment_escort'],
@@ -131,7 +131,7 @@ describe('leitura do perfil em voz alta', () => {
       verifiedSince: null,
     };
     const text = caregiverSpeech(caregiver);
-    expect(text).toContain('Ana Paula S., Enfermeiro(a).');
+    expect(text).toContain('Ana Paula S., Técnico(a) de enfermagem.');
     expect(text).toContain('Disponível agora.');
     expect(text).toContain('Vila Mariana e região, até 15 quilômetros');
     expect(text).toContain('Companhia e acompanhamento: 45 reais por hora.');

@@ -21,7 +21,7 @@ const CHOICES: Choice[] = [
     href: '/register/caregiver',
     title: 'Sou profissional de cuidado',
     description:
-      'Cuidador(a) de idosos, enfermeiro(a) ou fisioterapeuta. Envie seus documentos, ganhe o selo de verificado e receba solicitações.',
+      'Cuidador(a) de idosos, técnico(a) de enfermagem ou fisioterapeuta. Envie seus documentos, ganhe o selo de verificado e receba solicitações.',
   },
 ];
 

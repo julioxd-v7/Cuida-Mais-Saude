@@ -55,8 +55,8 @@ Legenda: ✅ feito · 🔜 próxima · ⬜ pendente
 
 ## Parte 3a — Profissões, verificação e suporte ✅ (falta validar aí)
 
-- ✅ Categorias: cuidador(a), enfermeiro(a), fisioterapeuta (técnico fora do MVP), com tipos de serviço por categoria
-- ✅ CPF validado e único; registro no COREN/CREFITO para enfermeiro e fisioterapeuta
+- ✅ Categorias: cuidador(a), técnico(a) de enfermagem, fisioterapeuta, com tipos de serviço por categoria
+- ✅ CPF validado e único; registro no COREN/CREFITO para técnico de enfermagem e fisioterapeuta
 - ✅ Documentos (antecedentes, identidade, comprovante, certificados, conselho) no Supabase Storage privado, por link de envio
 - ✅ Etapas até o selo, análise pelo admin com links temporários e auditoria, **selo de verificado**
 - ✅ Mensagens: estrutura única; **suporte** funcionando no app (cliente e profissional)
