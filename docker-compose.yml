@@ -1,0 +1,25 @@
+# CUIDAR+ — sobe o servidor (backend) com Docker.
+#
+#   docker compose up --build -d                    # sobe o servidor em segundo plano
+#   docker compose run --rm backend node_modules/.bin/tsx src/scripts/migrate.ts   # atualiza o banco
+#   docker compose logs -f backend                  # vê os logs (códigos de recuperação de senha)
+#   docker compose down                             # desliga
+#
+# O app (Expo) continua rodando fora do Docker: npx expo start, dentro de app.
+# A configuração vem de backend/.env (o mesmo arquivo de sempre; nunca vai para o Git).
+
+name: cuidar-mais
+
+services:
+  backend:
+    build: ./backend
+    container_name: cuidar-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      # Dentro do container precisa escutar em todas as interfaces.
+      HOST: 0.0.0.0
+      PORT: "3333"
+    ports:
+      - "3333:3333"
+    restart: unless-stopped

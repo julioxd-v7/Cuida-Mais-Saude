@@ -1,0 +1,10 @@
+# Nada de segredos, dependências locais ou testes dentro da imagem.
+node_modules
+.env
+.env.*
+!.env.example
+tests
+*.log
+Dockerfile
+.dockerignore
+README.md
