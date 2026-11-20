@@ -29,12 +29,12 @@ const brokenStorage: PreferenceStorage = {
 };
 
 describe('preferência de tema', () => {
-  it('aceita só valores conhecidos e cai no tema escuro', () => {
+  it('aceita só valores conhecidos e cai em "automático"', () => {
     expect(parseThemePreference('dark')).toBe('dark');
     expect(parseThemePreference('light')).toBe('light');
     expect(parseThemePreference('system')).toBe('system');
-    expect(parseThemePreference('roxo')).toBe('dark');
-    expect(parseThemePreference(null)).toBe('dark');
+    expect(parseThemePreference('roxo')).toBe('system');
+    expect(parseThemePreference(null)).toBe('system');
   });
 
   it('automático segue o aparelho; escolha manual vence o aparelho', () => {
@@ -47,18 +47,18 @@ describe('preferência de tema', () => {
 
   it('salva e restaura a escolha', async () => {
     const storage = memoryStorage();
+    expect(await loadThemePreference(storage)).toBe('system');
+    await saveThemePreference(storage, 'dark');
+    expect(storage.data[THEME_PREFERENCE_KEY]).toBe('dark');
     expect(await loadThemePreference(storage)).toBe('dark');
-    await saveThemePreference(storage, 'light');
-    expect(storage.data[THEME_PREFERENCE_KEY]).toBe('light');
-    expect(await loadThemePreference(storage)).toBe('light');
   });
 
-  it('valor salvo corrompido volta para o tema escuro', async () => {
-    expect(await loadThemePreference(memoryStorage({ [THEME_PREFERENCE_KEY]: '{}' }))).toBe('dark');
+  it('valor salvo corrompido volta para "automático"', async () => {
+    expect(await loadThemePreference(memoryStorage({ [THEME_PREFERENCE_KEY]: '{}' }))).toBe('system');
   });
 
   it('sem armazenamento não quebra o app', async () => {
-    expect(await loadThemePreference(brokenStorage)).toBe('dark');
+    expect(await loadThemePreference(brokenStorage)).toBe('system');
     await saveThemePreference(brokenStorage, 'light');
   });
 });

@@ -12,13 +12,7 @@ import {
   type Typography,
 } from './accessibility';
 import { resolveColors, type AppColors, type ColorScheme } from './colors';
-import {
-  DEFAULT_THEME_PREFERENCE,
-  loadThemePreference,
-  resolveScheme,
-  saveThemePreference,
-  type ThemePreference,
-} from './preference';
+import { loadThemePreference, resolveScheme, saveThemePreference, type ThemePreference } from './preference';
 
 type ThemeContextValue = {
   colors: AppColors;
@@ -45,7 +39,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
  */
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const systemScheme = useColorScheme();
-  const [preference, setPreferenceState] = useState<ThemePreference>(DEFAULT_THEME_PREFERENCE);
+  const [preference, setPreferenceState] = useState<ThemePreference>('system');
   const [accessibility, setAccessibilityState] = useState<AccessibilityPrefs>(DEFAULT_ACCESSIBILITY);
   const [ready, setReady] = useState(false);
 

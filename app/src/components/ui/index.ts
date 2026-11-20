@@ -23,7 +23,5 @@ export { ReadAloudButton } from './ReadAloudButton';
 export { SegmentedControl } from './SegmentedControl';
 export { SwitchRow } from './SwitchRow';
 export { MenuItem, MenuSection } from './MenuItem';
-export { IconBox } from './IconBox';
-export { Illustration } from './Illustration';
 export type { IconName, MenuItemProps } from './MenuItem';
 export { GoogleSignInButton } from './GoogleSignInButton';

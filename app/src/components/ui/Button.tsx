@@ -1,18 +1,15 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import {
   ActivityIndicator,
   Pressable,
   StyleSheet,
-  View,
   type PressableProps,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
 
-import { iconSize, interaction, radius, spacing, touchTarget, type AppColors, useStyles, useTheme } from '@/theme';
+import { interaction, radius, spacing, touchTarget, type AppColors, useStyles, useTheme } from '@/theme';
 
 import { AppText } from './AppText';
-import type { IconName } from './MenuItem';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 
@@ -21,10 +18,6 @@ export type ButtonProps = Omit<PressableProps, 'style' | 'children'> & {
   variant?: Variant;
   loading?: boolean;
   fullWidth?: boolean;
-  /** Ícone antes do texto (decorativo). */
-  icon?: IconName;
-  /** Ícone depois do texto (ex.: seta). */
-  trailingIcon?: IconName;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -38,8 +31,6 @@ export function Button({
   variant = 'primary',
   loading = false,
   fullWidth = true,
-  icon,
-  trailingIcon,
   disabled,
   style,
   ...rest
@@ -49,7 +40,6 @@ export function Button({
   const pressedStyles = useStyles(createPressedStyles);
   const isDisabled = Boolean(disabled) || loading;
   const textTone = variant === 'primary' ? 'onPrimary' : 'default';
-  const iconColor = variant === 'primary' ? colors.textOnPrimary : colors.text;
 
   return (
     <Pressable
@@ -73,13 +63,9 @@ export function Button({
           accessibilityLabel="Carregando"
         />
       ) : (
-        <View style={styles.inner}>
-          {icon ? <Ionicons name={icon} size={iconSize.md} color={iconColor} /> : null}
-          <AppText variant="bodyStrong" tone={textTone} numberOfLines={2} align="center">
-            {label}
-          </AppText>
-          {trailingIcon ? <Ionicons name={trailingIcon} size={iconSize.md} color={iconColor} /> : null}
-        </View>
+        <AppText variant="bodyStrong" tone={textTone} numberOfLines={2} align="center">
+          {label}
+        </AppText>
       )}
     </Pressable>
   );
@@ -90,15 +76,9 @@ const styles = StyleSheet.create({
     minHeight: touchTarget.min,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.md,
-    borderRadius: radius.pill,
+    borderRadius: radius.lg,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  inner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.sm,
   },
   fullWidth: {
     alignSelf: 'stretch',
@@ -112,11 +92,11 @@ const createVariantStyles = (colors: AppColors) => StyleSheet.create({
   primary: {
     backgroundColor: colors.primary,
   },
-  // Botão de vidro com borda verde, como nas telas de referência.
+  // Botão de vidro com borda clara.
   secondary: {
     backgroundColor: colors.glass,
-    borderWidth: 1.5,
-    borderColor: colors.accent,
+    borderWidth: 1,
+    borderColor: colors.borderStrong,
   },
   ghost: {
     backgroundColor: 'transparent',

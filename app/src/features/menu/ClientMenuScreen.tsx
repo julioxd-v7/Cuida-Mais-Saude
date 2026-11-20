@@ -1,12 +1,10 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { AppHeader, HeaderIconButton } from '@/components/layout/AppHeader';
 import { Screen } from '@/components/layout/Screen';
-import { AppText, IconBox, MenuItem, MenuSection } from '@/components/ui';
+import { AppText, Button, Card, MenuItem, MenuSection } from '@/components/ui';
 import { useAuth, useSignedInUser } from '@/providers/AuthProvider';
-import { iconSize, radius, spacing, type AppColors, useStyles, useTheme } from '@/theme';
+import { spacing } from '@/theme';
 
 import { AccountHeader } from './AccountHeader';
 import { useSignOut } from './useSignOut';
@@ -16,8 +14,6 @@ import { useSignOut } from './useSignOut';
  * o que ainda não existe aparece como "Em breve", sem toque.
  */
 export default function ClientMenuScreen() {
-  const styles = useStyles(createStyles);
-  const { colors } = useTheme();
   const user = useSignedInUser();
   const { state } = useAuth();
   const signOut = useSignOut();
@@ -25,10 +21,7 @@ export default function ClientMenuScreen() {
 
   return (
     <Screen>
-      <AppHeader
-        actions={<HeaderIconButton icon="settings-outline" label="Configurações" onPress={() => router.push('/settings')} />}
-      />
-      <AppText variant="title" accessibilityRole="header" style={styles.srTitle}>
+      <AppText variant="title" accessibilityRole="header">
         Perfil
       </AppText>
 
@@ -41,24 +34,16 @@ export default function ClientMenuScreen() {
       />
 
       {/* Contexto: próximo atendimento (ainda não há pedidos no app). */}
-      <Pressable
-        onPress={() => router.push('/client/agenda')}
-        accessibilityRole="button"
-        accessibilityLabel="Próximo atendimento: nenhum atendimento agendado. Abrir agenda"
-        style={({ pressed }) => [styles.next, pressed && styles.pressed]}
-      >
-        <IconBox icon="calendar-outline" size={56} />
-        <View style={styles.flex}>
-          <AppText variant="caption" tone="info" style={styles.eyebrow}>
-            PRÓXIMO ATENDIMENTO
-          </AppText>
-          <AppText variant="bodyStrong">Nenhum atendimento agendado</AppText>
-          <AppText variant="caption" tone="muted">
-            Agende um cuidado quando precisar.
-          </AppText>
-        </View>
-        <Ionicons name="chevron-forward" size={iconSize.md} color={colors.textMuted} />
-      </Pressable>
+      <Card>
+        <AppText variant="label" tone="muted">
+          PRÓXIMO ATENDIMENTO
+        </AppText>
+        <AppText variant="bodyStrong">Nenhum atendimento agendado</AppText>
+        <AppText variant="caption" tone="muted">
+          Os pedidos de atendimento chegam na próxima atualização. Enquanto isso, conheça os profissionais verificados.
+        </AppText>
+        <Button label="Buscar profissionais" variant="secondary" onPress={() => router.push('/client/search')} />
+      </Card>
 
       <MenuSection title="Cuidado">
         <MenuItem
@@ -73,48 +58,28 @@ export default function ClientMenuScreen() {
           subtitle="Pessoas que recebem o cuidado"
           onPress={() => router.push('/client/recipients')}
         />
-        <MenuItem
-          icon="location-outline"
-          title="Endereços salvos"
-          subtitle="Casa, familiares e locais frequentes"
-          onPress={() => router.push('/client/addresses')}
-        />
-        <MenuItem
-          icon="heart-outline"
-          title="Cuidadores favoritos"
-          subtitle="Profissionais que você salvou"
-          onPress={() => router.push('/client/favorites')}
-        />
+        <MenuItem icon="location-outline" title="Endereços salvos" onPress={() => router.push('/client/addresses')} />
+        <MenuItem icon="heart-outline" title="Cuidadores favoritos" onPress={() => router.push('/client/favorites')} />
       </MenuSection>
 
       <MenuSection title="Pagamentos">
-        <MenuItem icon="card-outline" title="Pagamentos e métodos" subtitle="Cartões, recibos e transações" soon />
-        <MenuItem icon="receipt-outline" title="Recibos" subtitle="Comprovantes e histórico de pagamentos" soon />
+        <MenuItem icon="card-outline" title="Pagamentos e métodos de pagamento" soon />
+        <MenuItem icon="receipt-outline" title="Recibos" soon />
       </MenuSection>
 
       <MenuSection title="Comunicação">
-        <MenuItem
-          icon="chatbubble-ellipses-outline"
-          title="Mensagens"
-          subtitle="Conversas com cuidadores"
-          onPress={() => router.push('/client/messages')}
-        />
-        <MenuItem icon="notifications-outline" title="Notificações" subtitle="Atualizações dos atendimentos" soon />
+        <MenuItem icon="chatbubbles-outline" title="Mensagens" onPress={() => router.push('/client/messages')} />
+        <MenuItem icon="notifications-outline" title="Notificações" soon />
       </MenuSection>
 
       <MenuSection title="Ajuda">
         <MenuItem
           icon="shield-checkmark-outline"
           title="Segurança e suporte"
-          subtitle="Ajuda, denúncias e incidentes"
+          subtitle="Suporte, denúncias, incidentes e emergência"
           onPress={() => router.push('/support')}
         />
-        <MenuItem
-          icon="settings-outline"
-          title="Configurações"
-          subtitle="Tema, privacidade e preferências"
-          onPress={() => router.push('/settings')}
-        />
+        <MenuItem icon="settings-outline" title="Configurações" onPress={() => router.push('/settings')} />
       </MenuSection>
 
       <View style={styles.signOut}>
@@ -126,36 +91,8 @@ export default function ClientMenuScreen() {
   );
 }
 
-const createStyles = (colors: AppColors) =>
-  StyleSheet.create({
-    flex: {
-      flex: 1,
-    },
-    // O título "Perfil" fica para o leitor de tela; o visual segue a referência (sem título grande).
-    srTitle: {
-      position: 'absolute',
-      width: 1,
-      height: 1,
-      opacity: 0,
-    },
-    next: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.md,
-      padding: spacing.lg,
-      borderRadius: radius.xl,
-      borderWidth: 1,
-      borderColor: colors.glassBorder,
-      backgroundColor: colors.glass,
-    },
-    pressed: {
-      backgroundColor: colors.glassPressed,
-    },
-    eyebrow: {
-      fontWeight: '700',
-      letterSpacing: 0.6,
-    },
-    signOut: {
-      marginBottom: spacing.lg,
-    },
-  });
+const styles = StyleSheet.create({
+  signOut: {
+    marginBottom: spacing.lg,
+  },
+});

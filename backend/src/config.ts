@@ -54,6 +54,8 @@ const configSchema = z
     }
   });
 
+const OPTIONAL_KEYS = new Set(['SUPABASE_URL', 'SUPABASE_SECRET_KEY', 'DATABASE_CA_CERT']);
+
 export type RawConfig = z.infer<typeof configSchema>;
 
 export type AppConfig = {
@@ -78,7 +80,11 @@ export type AppConfig = {
 };
 
 export function loadConfig(env: Record<string, string | undefined> = process.env): AppConfig {
-  const parsed = configSchema.safeParse(env);
+  // Linha opcional deixada vazia no .env (ex.: "SUPABASE_SECRET_KEY=") vale como não informada.
+  const cleaned = Object.fromEntries(
+    Object.entries(env).filter(([key, value]) => !(OPTIONAL_KEYS.has(key) && (value ?? '').trim() === '')),
+  );
+  const parsed = configSchema.safeParse(cleaned);
   if (!parsed.success) {
     const details = parsed.error.issues.map((issue) => `  - ${issue.path.join('.')}: ${issue.message}`);
     throw new Error(`Configuração inválida:\n${details.join('\n')}`);

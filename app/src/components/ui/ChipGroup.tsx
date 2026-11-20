@@ -1,12 +1,10 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { iconSize, radius, spacing, touchTarget, type AppColors, useStyles, useTheme } from '@/theme';
+import { radius, spacing, touchTarget, type AppColors, useStyles } from '@/theme';
 
 import { AppText } from './AppText';
-import type { IconName } from './MenuItem';
 
-type Option<T extends string> = { value: T; label: string; icon?: IconName };
+type Option<T extends string> = { value: T; label: string };
 
 export type ChipGroupProps<T extends string> = {
   label: string;
@@ -18,8 +16,6 @@ export type ChipGroupProps<T extends string> = {
   required?: boolean;
   error?: string;
   hint?: string;
-  /** Ícone ao lado do título do grupo. */
-  icon?: IconName;
 };
 
 /** Opções em "pílulas" para escolha única ou múltipla. */
@@ -32,10 +28,8 @@ export function ChipGroup<T extends string>({
   required,
   error,
   hint,
-  icon,
 }: ChipGroupProps<T>) {
   const styles = useStyles(createStyles);
-  const { colors } = useTheme();
   function toggle(value: T) {
     if (mode === 'single') {
       onChange([value]);
@@ -46,13 +40,10 @@ export function ChipGroup<T extends string>({
 
   return (
     <View style={styles.container} accessibilityRole={mode === 'single' ? 'radiogroup' : undefined}>
-      <View style={styles.titleRow}>
-        {icon ? <Ionicons name={icon} size={iconSize.lg} color={colors.accent} /> : null}
-        <AppText variant={icon ? 'subtitle' : 'label'}>
-          {label}
-          {required ? <AppText variant="label" tone="primary"> *</AppText> : null}
-        </AppText>
-      </View>
+      <AppText variant="label">
+        {label}
+        {required ? <AppText variant="label" tone="primary"> *</AppText> : null}
+      </AppText>
       {hint ? (
         <AppText variant="caption" tone="muted">
           {hint}
@@ -70,9 +61,6 @@ export function ChipGroup<T extends string>({
               accessibilityLabel={option.label}
               style={[styles.chip, active && styles.chipActive, Boolean(error) && !active && styles.chipError]}
             >
-              {option.icon ? (
-                <Ionicons name={option.icon} size={iconSize.md} color={active ? colors.selectedText : colors.accent} />
-              ) : null}
               <AppText variant="label" tone={active ? 'selected' : 'default'}>
                 {option.label}
               </AppText>
@@ -93,11 +81,6 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     gap: spacing.xs,
   },
-  titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
   chips: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -105,11 +88,8 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     marginTop: spacing.xs,
   },
   chip: {
-    minHeight: touchTarget.min,
-    flexDirection: 'row',
-    alignItems: 'center',
+    minHeight: touchTarget.min - 4,
     justifyContent: 'center',
-    gap: spacing.sm,
     paddingHorizontal: spacing.lg,
     borderRadius: radius.pill,
     borderWidth: 1.5,
@@ -119,11 +99,6 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   chipActive: {
     backgroundColor: colors.selectedBackground,
     borderColor: colors.selectedBackground,
-    shadowColor: colors.brand.green,
-    shadowOpacity: 0.45,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 4,
   },
   chipError: {
     borderColor: colors.dangerBorder,
