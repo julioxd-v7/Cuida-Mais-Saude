@@ -2,7 +2,6 @@ import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Screen } from '@/components/layout/Screen';
@@ -41,15 +40,6 @@ function RootNavigator() {
   useEffect(() => {
     if (!booting) void SplashScreen.hideAsync();
   }, [booting]);
-
-  // Na web, o preenchimento automático do navegador pintaria os campos de azul-claro.
-  useEffect(() => {
-    if (Platform.OS !== 'web') return;
-    const style = document.createElement('style');
-    style.textContent = `input:-webkit-autofill { -webkit-text-fill-color: ${colors.text}; caret-color: ${colors.text}; transition: background-color 99999s; }`;
-    document.head.appendChild(style);
-    return () => style.remove();
-  }, [colors.text]);
 
   if (booting) return null;
 

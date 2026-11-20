@@ -49,6 +49,14 @@ Passo 'Conferindo a pasta e o Node.js'
 if (-not (Test-Path $backend) -or -not (Test-Path $app)) {
   Parar "não achei as pastas 'backend' e 'app' ao lado deste script ($root)."
 }
+# A pasta do app se chamava "Viva-Mais-App". Se a antiga ainda existir, ela é
+# só renomeada (nada é apagado), para não confundir com a nova "app".
+$antiga = Join-Path $root 'Viva-Mais-App'
+if (Test-Path $antiga) {
+  $destino = Join-Path $root '_antigo-Viva-Mais-App'
+  if (Test-Path $destino) { Aviso "a pasta antiga 'Viva-Mais-App' ainda existe. Pode apagá-la: o app agora fica em 'app'." }
+  else { Rename-Item -LiteralPath $antiga -NewName '_antigo-Viva-Mais-App'; Ok "renomeei a pasta antiga para '_antigo-Viva-Mais-App' (pode apagar depois)" }
+}
 try { $versao = (node -v) } catch { Parar 'Node.js não encontrado. Instale a versão LTS em https://nodejs.org e abra o PowerShell de novo.' }
 $maior = [int]($versao.TrimStart('v').Split('.')[0])
 if ($maior -lt 22) { Parar "seu Node.js é $versao. Instale a versão 22 ou mais nova (LTS) em https://nodejs.org." }

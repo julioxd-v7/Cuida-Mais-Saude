@@ -1,6 +1,6 @@
 # Auditoria do repositório — CUIDAR MAIS
 
-**Data:** 21/10/2026 · **Repositório:** `github.com/julioxd-v7/Cuida-Mais-Saude` · **Branch auditada:** `main` (commit `990eaf5`)
+**Data:** 21/10/2026 · **Repositório:** `github.com/julioxd-v7/Viva-Mais-Saude` · **Branch auditada:** `main` (commit `990eaf5`)
 
 Este documento registra o estado do repositório **antes** da Parte 1 (fundação), o que foi encontrado e o que se decidiu fazer.
 
@@ -13,7 +13,7 @@ O repositório contém um projeto Expo recém-criado a partir do template oficia
 ## 2. Estrutura encontrada
 
 ```text
-Cuida-Mais-Saude/
+Viva-Mais-Saude/
 ├── app/        ← app Expo (template + tela de login)
 └── cuidarmais            ← "gitlink" (ponteiro de submódulo) SEM conteúdo
 ```
@@ -22,7 +22,7 @@ Cuida-Mais-Saude/
 
 | Commit | O que diz | O que realmente contém |
 |---|---|---|
-| `c4d2b0d` (16/09/2026) | "Adiciona MVP do CUIDAR MAIS (backend + frontend)" | Apenas um ponteiro de submódulo (`mode 160000`) com o nome antigo do repositório, apontando para o commit `c4dd4a0` do próprio repositório. **Nenhum arquivo.** |
+| `c4d2b0d` (16/09/2026) | "Adiciona MVP do CUIDAR MAIS (backend + frontend)" | Apenas um ponteiro de submódulo (`mode 160000`) chamado `Viva-Mais-Saude`, apontando para o commit `c4dd4a0` do próprio repositório. **Nenhum arquivo.** |
 | `8b4358d` | "Primeiro commit" | Renomeia esse ponteiro para `cuidarmais`. |
 
 Não existe `.gitmodules`. Isso acontece quando se executa `git add` numa pasta que tem o próprio `.git` dentro: o Git guarda só a referência e não os arquivos. **Se o MVP existe, ele está apenas no computador de quem fez esse commit.**

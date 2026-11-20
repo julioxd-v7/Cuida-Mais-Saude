@@ -44,10 +44,8 @@ export function Backdrop({ children }: { children: ReactNode }) {
 }
 
 const createStyles = (colors: AppColors) => StyleSheet.create({
-  // Sem o corte, na web os brilhos passam da tela e criam uma faixa branca ao rolar.
   flex: {
     flex: 1,
-    overflow: 'hidden',
     backgroundColor: colors.background,
   },
   blob: {
@@ -55,10 +53,10 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     borderRadius: 999,
   },
   blobGreen: {
-    width: 420,
-    height: 420,
-    top: -230,
-    left: -60,
+    width: 300,
+    height: 300,
+    top: -110,
+    right: -120,
     backgroundColor: colors.glowGreen,
   },
   blobBlue: {
@@ -69,10 +67,10 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     backgroundColor: colors.glowBlue,
   },
   blobBlueSmall: {
-    width: 220,
-    height: 220,
-    top: '28%',
-    right: -130,
-    backgroundColor: colors.glowGreen,
+    width: 160,
+    height: 160,
+    top: '45%',
+    right: -80,
+    backgroundColor: colors.glowBlue,
   },
 });

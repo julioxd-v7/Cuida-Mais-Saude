@@ -1,11 +1,9 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, type ReactNode, type Ref } from 'react';
 import { StyleSheet, TextInput, View, type TextInputProps } from 'react-native';
 
-import { iconSize, radius, spacing, touchTarget, type AppColors, useStyles, useTheme } from '@/theme';
+import { radius, spacing, touchTarget, type AppColors, useStyles, useTheme } from '@/theme';
 
 import { AppText } from './AppText';
-import type { IconName } from './MenuItem';
 
 export type TextFieldProps = TextInputProps & {
   label: string;
@@ -15,10 +13,6 @@ export type TextFieldProps = TextInputProps & {
   required?: boolean;
   /** Elemento à direita dentro do campo (ex.: botão de mostrar senha). */
   trailing?: ReactNode;
-  /** Ícone decorativo à esquerda, dentro do campo. */
-  leadingIcon?: IconName;
-  /** Ícone ao lado do rótulo. */
-  labelIcon?: IconName;
   ref?: Ref<TextInput>;
 };
 
@@ -27,7 +21,7 @@ export type TextFieldProps = TextInputProps & {
  * logo abaixo do campo. O rótulo fica sempre visível (placeholder sozinho
  * some ao digitar e prejudica a acessibilidade).
  */
-export function TextField({ label, error, hint, required, trailing, leadingIcon, labelIcon, onFocus, onBlur, style, ref, multiline, ...rest }: TextFieldProps) {
+export function TextField({ label, error, hint, required, trailing, onFocus, onBlur, style, ref, multiline, ...rest }: TextFieldProps) {
   const { colors, typography, maxFontSizeMultiplier } = useTheme();
   const styles = useStyles(createStyles);
   const [focused, setFocused] = useState(false);
@@ -36,18 +30,12 @@ export function TextField({ label, error, hint, required, trailing, leadingIcon,
 
   return (
     <View style={styles.container}>
-      <View style={styles.labelRow} importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
-        {labelIcon ? <Ionicons name={labelIcon} size={iconSize.lg} color={colors.accent} /> : null}
-        <AppText variant={labelIcon ? 'subtitle' : 'label'}>
-          {label}
-          {required ? <AppText variant="label" tone="primary"> *</AppText> : null}
-        </AppText>
-      </View>
+      <AppText variant="label" importantForAccessibility="no" accessibilityElementsHidden>
+        {label}
+        {required ? <AppText variant="label" tone="primary"> *</AppText> : null}
+      </AppText>
 
       <View style={[styles.box, { borderColor }, multiline && styles.boxMultiline]}>
-        {leadingIcon ? (
-          <Ionicons name={leadingIcon} size={iconSize.md} color={colors.textMuted} style={styles.leadingIcon} />
-        ) : null}
         <TextInput
           ref={ref}
           accessibilityLabel={a11yLabel}
@@ -87,20 +75,12 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     gap: spacing.xs,
   },
-  labelRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  leadingIcon: {
-    marginLeft: spacing.lg,
-  },
   box: {
     minHeight: touchTarget.min,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: radius.lg,
-    borderWidth: 1.5,
+    borderRadius: radius.md,
+    borderWidth: 2,
     backgroundColor: colors.inputBackground,
   },
   boxMultiline: {

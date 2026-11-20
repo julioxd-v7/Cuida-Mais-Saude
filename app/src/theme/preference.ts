@@ -7,11 +7,8 @@ export const THEME_PREFERENCES: readonly ThemePreference[] = ['system', 'light',
 
 export const THEME_PREFERENCE_KEY = 'cuidarmais.theme.v1';
 
-/** Tema de quem nunca escolheu: o escuro, que é o visual principal do app. */
-export const DEFAULT_THEME_PREFERENCE: ThemePreference = 'dark';
-
 export function parseThemePreference(value: string | null | undefined): ThemePreference {
-  return value === 'light' || value === 'dark' || value === 'system' ? value : DEFAULT_THEME_PREFERENCE;
+  return value === 'light' || value === 'dark' || value === 'system' ? value : 'system';
 }
 
 /** Tema efetivo: a escolha da pessoa, ou o do aparelho quando "automático". */
@@ -30,7 +27,7 @@ export async function loadThemePreference(storage: PreferenceStorage): Promise<T
   try {
     return parseThemePreference(await storage.getItem(THEME_PREFERENCE_KEY));
   } catch {
-    return DEFAULT_THEME_PREFERENCE;
+    return 'system';
   }
 }
 

@@ -4,8 +4,6 @@ import { spacing, useTheme } from '@/theme';
 
 import { AppText } from './AppText';
 import { Button } from './Button';
-import { Illustration } from './Illustration';
-import type { IconName } from './MenuItem';
 
 /** Estado de carregamento de uma tela ou seção. */
 export function LoadingState({ message = 'Carregando…' }: { message?: string }) {
@@ -22,18 +20,15 @@ export function LoadingState({ message = 'Carregando…' }: { message?: string }
 
 type EmptyOrErrorProps = {
   title: string;
-  /** Ilustração acima do título (só no estado vazio). */
-  icon?: IconName;
   message?: string;
   actionLabel?: string;
   onAction?: () => void;
 };
 
 /** Lista ou seção sem conteúdo (ex.: "Você ainda não tem agendamentos"). */
-export function EmptyState({ title, icon, message, actionLabel, onAction }: EmptyOrErrorProps) {
+export function EmptyState({ title, message, actionLabel, onAction }: EmptyOrErrorProps) {
   return (
     <View style={styles.center}>
-      {icon ? <Illustration icon={icon} /> : null}
       <AppText variant="subtitle" align="center">
         {title}
       </AppText>
